@@ -3,13 +3,14 @@ import axios from 'axios'
 const Navbar = () => {
 
     const [Exchanges, setExchanges] = useState([]);
-
+    const [nameCr, setnameCr] = useState("");
     useEffect(() => {
       axios.get('https://api.coingecko.com/api/v3/exchanges').then((res) =>{
+          setnameCr(res.data[0].name)
           setExchanges(res.data);
       }).catch((error) => console.log(error))
-    })
-
+    }, [])
+    console.log(nameCr)
     // useEffect(() => {
     //     fetchUsers();
     // }, [])
@@ -66,7 +67,7 @@ const Navbar = () => {
                     </div>
                 </nav>
             </div>
-            <h1>API Data </h1>
+            <h1>API Data {nameCr}</h1>
             <div className="container mx-auto">
                 <table className="table">
                     <thead>
